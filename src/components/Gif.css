@@ -1,0 +1,20 @@
+.gifs-body{
+    background-color: white;
+    border: 1px dashed black;
+    border-radius: 6px;
+    display: flex;
+    flex-flow: wrap column;
+    margin: 16px;
+    padding: 32px;
+    width: 100%;
+    color: black;
+    text-decoration: none;
+}
+
+.gifs-body h3 {
+    margin: 0;
+}
+
+.gifs-body img{
+    object-fit: contain;
+}
