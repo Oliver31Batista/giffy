@@ -21,6 +21,8 @@ const Home = () => {
     <>
       <form onSubmit={handleSubmit}>
         <input onChange={handleChange} type="text" value={keyword} placeholder='Search a gif here... 🔍'/>
+        <button>Buscar</button>
+        {/*el formulario identifica al ultimo boton como el boton de submit, por eso es una ventaja manejar el onSubmit desde el form directamente*/}
       </form>
       <h3 className="App-Title">Los Gifs más populares</h3>
       <ul>

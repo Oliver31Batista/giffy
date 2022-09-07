@@ -1,20 +1,30 @@
-.gifs-body{
-    background-color: white;
-    border: 1px dashed black;
-    border-radius: 6px;
-    display: flex;
-    flex-flow: wrap column;
-    margin: 16px;
-    padding: 32px;
-    width: 100%;
-    color: black;
-    text-decoration: none;
+.Gif {
+  margin-bottom: 0.5em;
 }
 
-.gifs-body h3 {
-    margin: 0;
+.Gif-link {
+  color: #000;
+  display: block;
+  text-decoration: none;
+  position: relative;
+  width: 100%;
 }
 
-.gifs-body img{
-    object-fit: contain;
+.Gif h4 {
+  background: rgba(0, 0, 0, 0.3);
+  bottom: 0;
+  font-size: 12px;
+  color: #fff;
+  margin: 0;
+  position: absolute;
+}
+
+.Gif img {
+  width: 100%;
+  object-fit: contain;
+  vertical-align: top;
+}
+
+i {
+  font-size: 80px;
 }
