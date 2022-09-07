@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
+import ListOfGifs from '../../components/ListOfGifs/ListOfGifs';
+import { getGifs } from '../../services/getGifs';
 import './Home.css';
 
 const POPULAR_GIFS = ['Rick & Mortys', 'Pandas', 'Aliens', 'Metal'];
@@ -7,6 +9,18 @@ const POPULAR_GIFS = ['Rick & Mortys', 'Pandas', 'Aliens', 'Metal'];
 const Home = () => {
   const [keyword, setKeyword] = useState('');
   const [path, pushLocation] = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [gifs, setGifs] = useState([]);
+
+  useEffect(
+    function () {
+      setLoading(true);
+      getGifs({ keyword:'Los simpson' }).then((gifs) => {
+        setGifs(gifs);
+        setLoading(false);
+      });
+    },
+    [keyword]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -24,6 +38,8 @@ const Home = () => {
         <button>Buscar</button>
         {/*el formulario identifica al ultimo boton como el boton de submit, por eso es una ventaja manejar el onSubmit desde el form directamente*/}
       </form>
+      <h3 className="App-Title">Buscado recientemente...</h3>
+      <ListOfGifs gifs={gifs} />
       <h3 className="App-Title">Los Gifs más populares</h3>
       <ul>
         {POPULAR_GIFS.map((popularGif) => (
