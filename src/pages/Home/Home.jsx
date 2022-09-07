@@ -1,23 +1,37 @@
-import React from 'react'
-import { Link } from 'wouter'
-import './Home.css'
+import React, { useState } from 'react';
+import { Link, useLocation } from 'wouter';
+import './Home.css';
 
-const POPULAR_GIFS = ["Rick & Mortys", "Pandas", "Aliens", "Metal"];
+const POPULAR_GIFS = ['Rick & Mortys', 'Pandas', 'Aliens', 'Metal'];
 
 const Home = () => {
+  const [keyword, setKeyword] = useState('');
+  const [path, pushLocation] = useLocation();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    //navigate to another route
+    pushLocation(`/search/${keyword}`)
+  };
+
+  const handleChange = (evt) => {
+    setKeyword(evt.target.value)
+  };
   return (
     <>
-    <h3 className='App-Title'>Los Gifs más populares</h3>
-
-    <ul>
+      <form onSubmit={handleSubmit}>
+        <input onChange={handleChange} type="text" value={keyword} placeholder='Search a gif here... 🔍'/>
+      </form>
+      <h3 className="App-Title">Los Gifs más populares</h3>
+      <ul>
         {POPULAR_GIFS.map((popularGif) => (
-            <li key={popularGif}>
-                <Link to={`/search/${popularGif}`}>Gifs de {popularGif}</Link>
-            </li>
+          <li key={popularGif}>
+            <Link to={`/search/${popularGif}`}>Gifs de {popularGif}</Link>
+          </li>
         ))}
-    </ul>
+      </ul>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
