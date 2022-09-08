@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
+import { useGifs } from '../../components/hooks/useGifs';
 import ListOfGifs from '../../components/ListOfGifs/ListOfGifs';
 import { getGifs } from '../../services/getGifs';
 import './Home.css';
@@ -9,32 +10,26 @@ const POPULAR_GIFS = ['Rick & Mortys', 'Pandas', 'Aliens', 'Metal'];
 const Home = () => {
   const [keyword, setKeyword] = useState('');
   const [path, pushLocation] = useLocation();
-  const [loading, setLoading] = useState(false);
-  const [gifs, setGifs] = useState([]);
-
-  useEffect(
-    function () {
-      setLoading(true);
-      getGifs({ keyword:'Los simpson' }).then((gifs) => {
-        setGifs(gifs);
-        setLoading(false);
-      });
-    },
-    [keyword]);
+  const { loading, gifs } = useGifs();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     //navigate to another route
-    pushLocation(`/search/${keyword}`)
+    pushLocation(`/search/${keyword}`);
   };
 
   const handleChange = (evt) => {
-    setKeyword(evt.target.value)
+    setKeyword(evt.target.value);
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input onChange={handleChange} type="text" value={keyword} placeholder='Search a gif here... 🔍'/>
+        <input
+          onChange={handleChange}
+          type="text"
+          value={keyword}
+          placeholder="Search a gif here... 🔍"
+        />
         <button>Buscar</button>
         {/*el formulario identifica al ultimo boton como el boton de submit, por eso es una ventaja manejar el onSubmit desde el form directamente*/}
       </form>
