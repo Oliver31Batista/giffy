@@ -4,6 +4,7 @@ import SearchResults from './pages/SearchResults/SearchResults';
 import Home from './pages/Home/Home';
 import Detail from './pages/Details/Detail';
 import StaticContext from './context/StaticContext';
+import { GifsContextProvider } from './context/GifsContext';
 
 function App() {
   return (
@@ -14,10 +15,12 @@ function App() {
           <Link to="/">
             <h1>GiffyLand</h1>
           </Link>
-          <Route component={Home} path="/" />
+          <GifsContextProvider>
+            <Route component={Home} path="/" />
 
-          <Route component={SearchResults} path="/search/:keyword" />
-          <Route component={Detail} path="/gif/:id" />
+            <Route component={SearchResults} path="/search/:keyword" />
+            <Route component={Detail} path="/gif/:id" />
+          </GifsContextProvider>
         </section>
       </div>
     </StaticContext.Provider>
